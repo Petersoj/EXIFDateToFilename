@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'net.jacobpeterson.randomprojects'
+version '1.0.0-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_14
+targetCompatibility = JavaVersion.VERSION_14
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+mainClassName = 'net.jacobpeterson.randomprojects.EXIFDateToFilename'
+applicationName = 'exiffilename'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // EXIF extractor
+    implementation group: 'com.drewnoakes', name: 'metadata-extractor', version: '2.18.0'
+
+    // For parsing CLI parameters
+    implementation group: 'com.beust', name: 'jcommander', version: '1.82'
+}
+
+distTar.enabled = false
+distZip.enabled = false
+build {
+    dependsOn installDist // Creates shell scripts to run the already built jars
+}
